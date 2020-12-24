@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@drawable/mck">
+    android:background="@drawable/nen"
+    android:orientation="vertical">
     <TextView
         android:id="@+id/namebh"
         android:layout_width="match_parent"
@@ -16,10 +17,31 @@
         android:textSize="20sp"
         android:fontFamily="sans-serif"/>
     <LinearLayout
+        android:layout_marginTop="150dp"
+        android:layout_below="@id/namebh"
+        android:id="@+id/dia"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+        //tại đường viền tròn
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/hinhnhac"
+            android:layout_gravity="center"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:src="@drawable/mck" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/namebh"
-        android:layout_marginTop="600dp">
+        android:layout_below="@+id/dia"
+        android:layout_marginTop="200dp">
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"

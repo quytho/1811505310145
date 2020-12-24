@@ -5,10 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
     public ImageView back, next, play, stop;
@@ -16,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Song> arraySong;
     public MediaPlayer mediaPlayer;
     int position = 0;
+    CircleImageView hinhnhac;
+    Animation animationRotate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 khoiTaoMedia();
                 mediaPlayer.start();
                 play.setImageResource(R.drawable.ic_baseline_pause_24);
+                quay();
             }
         });
 
@@ -55,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 khoiTaoMedia();
                 mediaPlayer.start();
                 play.setImageResource(R.drawable.ic_baseline_pause_24);
+                quay();
             }
         });
         khoiTaoMedia();
@@ -65,10 +73,13 @@ public class MainActivity extends AppCompatActivity {
                 if(mediaPlayer.isPlaying()){
                     mediaPlayer.pause();
                     play.setImageResource(R.drawable.ic_baseline_play_arrow_24);
+
+
                 }
                 else{
                     mediaPlayer .start();
                     play.setImageResource(R.drawable.ic_baseline_pause_24);
+                    quay();
                 }
             }
         });
@@ -77,16 +88,35 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mediaPlayer.stop();
+                play.setImageResource(R.drawable.ic_baseline_play_arrow_24);
+
+
             }
         });
+
+
     }
+
+    //hiệu ứng quay đĩa nhạc
+    private void quay(){
+        final CircleImageView hinhnhac = (CircleImageView) findViewById(R.id.hinhnhac);
+        final Animation animationRotate = AnimationUtils.loadAnimation(this, R.anim.anim_quay);
+        hinhnhac.startAnimation(animationRotate);
+
+    }
+    //ngừng hiệu ứng quay
 
     //ánh xạ các phần tử
     private void anhxa(){
+        //về sau
         back = findViewById(R.id.back);
+        //tới
         next = findViewById(R.id.next);
+        //chơi nhạc
         play = findViewById(R.id.play);
+        //ten bài hát
         name = findViewById(R.id.namebh);
+        //dừng bài hát
         stop = findViewById(R.id.stop);
     }
     //thêm bài hát vào mảng
@@ -100,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
     // khởi tạo media để phát nhạc + tên bài hát
     private void khoiTaoMedia(){
-         mediaPlayer = MediaPlayer.create(MainActivity.this, arraySong.get(position).getFile());
+        mediaPlayer = MediaPlayer.create(MainActivity.this, arraySong.get(position).getFile());
         name.setText(arraySong.get(position).getTitle());
     }
 
